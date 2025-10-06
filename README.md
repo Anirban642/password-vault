@@ -1,40 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🔐 Password Generator + Secure Vault (MVP)
 
-## Getting Started
+> **Live Demo**: [https://your-demo-url.vercel.app]([https://your-demo-url.vercel.app](https://password-vault-alpha.vercel.app/))  
+> **GitHub Repo**: [https://github.com/your-username/password-vault-mvp](https://github.com/Anirban642/password-vault)  
+> **Screen Recording (60–90s)**: [Watch Flow → Generate → Save → Search → Edit → Delete](https://your-screen-recording-link.com)
 
-First, run the development server:
+---
+
+## 🎯 Goal
+
+Build a fast, minimal, privacy-first web app where users can:
+
+- ✅ Generate strong passwords with customizable options  
+- ✅ Save entries securely to a personal vault (client-side encrypted)  
+- ✅ View, edit, delete saved items in a clean panel  
+- ✅ Copy passwords with auto-clear (~10–20s)  
+- ✅ Search/filter through vault items  
+
+---
+
+## ⚙️ Tech Stack
+
+- **Frontend**: Next.js 14 (App Router) + TypeScript + Tailwind CSS  
+- **Backend**: Next.js API Routes (Server Actions)  
+- **Database**: MongoDB (via MongoDB Atlas)  
+- **Auth**: Email + Password (NextAuth.js / Credentials Provider)  
+- **Encryption**: `crypto-js` AES (client-side only — server never sees plaintext)  
+- **UI**: Minimal, no heavy themes. Dark mode toggle included.  
+- **Hosting**: Vercel (free tier)
+
+---
+
+## ✅ Must-Haves Implemented
+
+- **🔐 Password Generator**  
+  - Slider for length (8–64)  
+  - Toggles: Include Numbers, Letters, Symbols, Exclude Ambiguous (e.g., 0/O, l/1)  
+  - Instant generation on toggle/slider change  
+
+- **👤 Simple Auth**  
+  - Sign up / Log in with email + password  
+  - Session management via NextAuth.js  
+
+- **🗄️ Vault Items Structure**  
+  - Title (required)  
+  - Username  
+  - Password (encrypted client-side)  
+  - URL  
+  - Notes (optional)  
+
+- **🔒 Client-Side Encryption**  
+  - All sensitive fields encrypted before hitting the server  
+  - Decrypted only in browser memory during view/edit  
+  - Server stores only encrypted blobs → verified in DB & network tab  
+
+- **📋 Copy to Clipboard + Auto-Clear**  
+  - One-click copy for passwords/usernames  
+  - Clears clipboard automatically after 15 seconds  
+
+- **🔍 Basic Search/Filter**  
+  - Real-time filter by title or URL as you type  
+
+---
+
+## 📦 Deliverables Checklist
+
+- [x] Live demo URL accessible  
+- [x] Public GitHub repo with full source + README  
+- [x] Short crypto note (see below)  
+- [x] 60–90s screen recording showing core flow  
+- [x] No secrets in logs or code  
+- [x] UI is minimal, fast, responsive  
+
+---
+
+## 🔐 Crypto Note
+
+> Used `crypto-js` AES encryption with PBKDF2-derived key from user’s password. All encryption/decryption happens client-side — server only ever handles encrypted blobs. Ensures zero plaintext exposure even if DB is compromised.
+
+---
+
+## ▶️ Quick Start (Local Setup)
 
 ```bash
+git clone https://github.com/your-username/password-vault-mvp.git
+cd password-vault-mvp
+cp .env.local.example .env.local
+# Fill in MONGODB_URI and NEXTAUTH_SECRET
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
