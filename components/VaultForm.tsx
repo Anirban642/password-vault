@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import CryptoJS from 'crypto-js';
 
@@ -31,7 +31,7 @@ const VaultForm: React.FC<VaultFormProps> = ({ onAdd, generatedPassword, item, o
 
   const encryptionKey = 'vault-secret-key-123';
 
-  const validateInputs = () => {
+  const validateInputs = useCallback(() => {
     const newErrors: { title?: string; url?: string } = {};
 
     // Title validation: required, max 50 characters
@@ -55,7 +55,7 @@ const VaultForm: React.FC<VaultFormProps> = ({ onAdd, generatedPassword, item, o
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
+  }, [title, url]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,15 +96,16 @@ const VaultForm: React.FC<VaultFormProps> = ({ onAdd, generatedPassword, item, o
       setErrors({});
       onAdd();
       if (item && onCancel) onCancel();
-    } catch (err: any) {
-      setErrors({ ...errors, server: err.message || `Failed to ${item ? 'update' : 'save'} vault item` });
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : `Failed to ${item ? 'update' : 'save'} vault item`;
+      setErrors({ ...errors, server: errorMessage });
     }
   };
 
   // Real-time validation on input change
   useEffect(() => {
     validateInputs();
-  }, [title, url]);
+  }, [validateInputs]);
 
   return (
     <div className="p-4 border border-gray-300 rounded-md">

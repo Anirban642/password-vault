@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [refreshVault, setRefreshVault] = useState(0);
-  const [generatedPassword, setGeneratedPassword] = useState(''); // New state
+  const [generatedPassword, setGeneratedPassword] = useState('');
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,8 +20,9 @@ const Home: NextPage = () => {
       await signup(email, password);
       await login(email, password);
       setError('');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+      setError(errorMessage);
     }
   };
 
@@ -30,8 +31,9 @@ const Home: NextPage = () => {
     try {
       await login(email, password);
       setError('');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+      setError(errorMessage);
     }
   };
 
@@ -40,7 +42,7 @@ const Home: NextPage = () => {
     setEmail('');
     setPassword('');
     setError('');
-    setGeneratedPassword(''); // Clear generated password on logout
+    setGeneratedPassword('');
   };
 
   return (

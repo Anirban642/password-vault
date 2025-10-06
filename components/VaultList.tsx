@@ -67,8 +67,9 @@ const VaultList: React.FC<VaultListProps> = ({ refreshVault }) => {
         setVaultItems(decryptedItems);
         setFilteredItems(decryptedItems);
         setError(decryptedItems.length === 0 && items.length > 0 ? 'Some items could not be decrypted' : '');
-      } catch (err: any) {
-        setError(err.message || 'Failed to fetch vault items');
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Failed to fetch vault items';
+        setError(errorMessage);
       }
     };
 
@@ -77,7 +78,7 @@ const VaultList: React.FC<VaultListProps> = ({ refreshVault }) => {
 
   useEffect(() => {
     const lowerQuery = searchQuery.toLowerCase();
-    let filtered = vaultItems.filter(
+    const filtered = vaultItems.filter(
       item =>
         item.title.toLowerCase().includes(lowerQuery) ||
         item.username.toLowerCase().includes(lowerQuery) ||
@@ -126,8 +127,9 @@ const VaultList: React.FC<VaultListProps> = ({ refreshVault }) => {
       }
       setVaultItems(vaultItems.filter(item => item._id !== id));
       setError('');
-    } catch (err: any) {
-      setError(err.message || 'Failed to delete vault item');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to delete vault item';
+      setError(errorMessage);
     }
   };
 

@@ -11,11 +11,11 @@ export function authMiddleware(handler: (req: NextApiRequest, res: NextApiRespon
     const token = authHeader.replace('Bearer ', '');
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as { userId: string };
-      req.userId = decoded.userId; // Attach userId to req for use in handler
+      req.userId = decoded.userId;
       await handler(req, res);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Auth middleware error:', error);
-      if (error.name === 'TokenExpiredError') {
+      if (error instanceof Error && error.name === 'TokenExpiredError') {
         return res.status(401).json({ message: 'Token expired' });
       }
       return res.status(401).json({ message: 'Invalid token' });

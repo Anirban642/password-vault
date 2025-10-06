@@ -30,11 +30,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (!updatedItem) {
       return res.status(404).json({ message: 'Vault item not found' });
     }
-    console.log('Updated vault item:', updatedItem); // Debug log
+    console.log('Updated vault item:', updatedItem);
     return res.status(200).json({ message: 'Vault item updated successfully' });
-  } catch (error: any) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Vault edit error:', error);
-    return res.status(500).json({ message: 'Server error', error: error.message });
+    return res.status(500).json({ message: 'Server error', error: errorMessage });
   }
 }
 

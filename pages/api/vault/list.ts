@@ -16,11 +16,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     const vaultItems = await VaultItem.find({ userId: req.userId }).select('_id encryptedData createdAt');
-    console.log('Fetched vault items:', vaultItems); // Debug log
+    console.log('Fetched vault items:', vaultItems);
     return res.status(200).json(vaultItems);
-  } catch (error: any) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Vault fetch error:', error);
-    return res.status(500).json({ message: 'Server error', error: error.message });
+    return res.status(500).json({ message: 'Server error', error: errorMessage });
   }
 }
 
