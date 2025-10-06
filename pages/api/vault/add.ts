@@ -28,9 +28,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     await vaultItem.save();
     console.log('Vault item created:', vaultItem); // Debug log
     return res.status(201).json({ message: 'Vault item created successfully' });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Vault creation error:', error);
-    return res.status(500).json({ message: 'Server error', error: error.message });
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return res.status(500).json({ message: 'Server error', error: errorMessage });
   }
 }
 

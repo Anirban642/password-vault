@@ -27,9 +27,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     }
 
     return res.status(200).json({ message: 'Item deleted successfully' });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Delete error:', error);
-    return res.status(500).json({ message: 'Server error', error: error.message });
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return res.status(500).json({ message: 'Server error', error: errorMessage });
   }
 }
 
