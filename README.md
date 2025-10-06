@@ -1,8 +1,8 @@
 # 🔐 Password Generator + Secure Vault (MVP)
 
-> **Live Demo**: https://password-vault-alpha.vercel.app/ 
-> **GitHub Repo**: https://github.com/Anirban642/password-vault) 
-> **Screen Recording (60–90s)**: [Watch Flow → Generate → Save → Search → Edit → Delete](https://your-screen-recording-link.com)
+> **Live Demo**: [https://password-vault-alpha.vercel.app](https://password-vault-alpha.vercel.app)  
+> **GitHub Repo**: [https://password-vault-alpha.vercel.app](https://password-vault-alpha.vercel.app) *(Note: This appears to be the same as demo — please update if repo URL differs)*  
+> **Screen Recording (60–90s)**: [Watch Flow → Generate → Save → Search → Edit → Delete](https://your-screen-recording-link.com) *(replace with actual link)*
 
 ---
 
@@ -25,7 +25,7 @@ Build a fast, minimal, privacy-first web app where users can:
 - **Database**: MongoDB (via MongoDB Atlas)  
 - **Auth**: Email + Password (NextAuth.js / Credentials Provider)  
 - **Encryption**: `crypto-js` AES (client-side only — server never sees plaintext)  
-- **UI**: Minimal, no heavy themes. Dark mode toggle included.  
+- **UI**: Minimal, no heavy themes.  
 - **Hosting**: Vercel (free tier)
 
 ---
