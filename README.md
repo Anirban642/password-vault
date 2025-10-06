@@ -1,7 +1,7 @@
 # 🔐 Password Generator + Secure Vault (MVP)
 
 > **Live Demo**: [https://password-vault-alpha.vercel.app](https://password-vault-alpha.vercel.app)  
-> **GitHub Repo**: [Github](https://github.com/Anirban642/password-vault) *(Note: This appears to be the same as demo — please update if repo URL differs)*  
+> **GitHub Repo**: [Github](https://github.com/Anirban642/password-vault)  
 > **Screen Recording (60–90s)**: [Watch Flow → Generate → Save → Search → Edit → Delete](https://your-screen-recording-link.com) *(replace with actual link)*
 
 ---
